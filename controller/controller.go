@@ -168,6 +168,7 @@ func appHandler(c handlerConfig) http.Handler {
 	crud(httpRouter, "artifacts", ct.Artifact{}, artifactRepo)
 	crud(httpRouter, "keys", ct.Key{}, keyRepo)
 
+	httpRouter.POST("/apps", httphelper.WrapHandler(api.CreateApp))
 	httpRouter.POST("/apps/:apps_id", httphelper.WrapHandler(api.UpdateApp))
 	httpRouter.GET("/apps/:apps_id/log", httphelper.WrapHandler(api.appLookup(api.AppLog)))
 	httpRouter.GET("/apps/:apps_id/events", httphelper.WrapHandler(api.appLookup(api.AppEvents)))
